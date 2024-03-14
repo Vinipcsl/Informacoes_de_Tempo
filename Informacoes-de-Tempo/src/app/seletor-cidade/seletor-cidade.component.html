@@ -1,15 +1,18 @@
 <div id="formulario-cidade" class="login-box">
     <label for="nome-cidade">Nome da Cidade:</label>
     <form>
+
       <div class="user-box">
       <input type="text" id="nome-cidade" name="nome-cidade" required [(ngModel)] = "nomeCidade">
       </div>
+
       <button type="submit" class="button2">
         Enviar
       </button>
 
-      <div class="resultado" *ngIf="weather !==null">
+      <div class="resultado" *ngIf= "weather !== null">
         Weather : {{weather}}
       </div>
+      
     </form>
   </div>
