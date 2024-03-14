@@ -2,10 +2,14 @@
     <label for="nome-cidade">Nome da Cidade:</label>
     <form>
       <div class="user-box">
-      <input type="text" id="nome-cidade" name="nome-cidade" required>
+      <input type="text" id="nome-cidade" name="nome-cidade" required [(ngModel)] = "nomeCidade">
       </div>
       <button type="submit" class="btn">
         Enviar
       </button>
+
+      <div class="resultado" *ngIf="weather !==null">
+        Weather : {{weather}}
+      </div>
     </form>
   </div>

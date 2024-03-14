@@ -13,19 +13,31 @@ import { InformacaoClimaComponent } from '../informacao-clima/informacao-clima.c
 })
 export class SeletorCidadeComponent {
   nomeCidade: string = '';
+  weather: string | null = null;
+  private cityService: ServicoClimaService;
 
-  constructor(private servicoClima: ServicoClimaService, ) {}
+  constructor(private cityServiceInstance: ServicoClimaService) {
+    this.cityService = cityServiceInstance;
+  }
 
-  enviarNomeCidade(): void {
-    this.servicoClima.enviarCidade(this.nomeCidade).subscribe(
-      (      data: any) => {
-        console.log('Sucesso:', data);
+  getWeather(): void {
+    this.cityService.geocodificar(this.nomeCidade).subscribe(
+      (response: any) => {
+        // Handle the response here
+        console.log('Response:', response);
+
+        // Extract weather information
+        if (response.weather && response.weather.length > 0) {
+          this.weather = response.weather[0].description;
+          console.log('Weather Description:', this.weather);
+        } else {
+          console.warn('No weather data found.');
+        }
       },
-      (      error: any) => {
-        console.error('Erro:', error);
+      (error: any) => {
+        console.error('Error fetching city data:', error);
       }
     );
-  };
-
+  }
   
 }
