@@ -2,18 +2,19 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ServicoClimaService } from '../servico-clima.service';
+import { InformacaoClimaComponent } from '../informacao-clima/informacao-clima.component';
 
 @Component({
   selector: 'app-seletor-cidade',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, InformacaoClimaComponent],
   templateUrl: './seletor-cidade.component.html',
   styleUrls: ['./seletor-cidade.component.css']
 })
 export class SeletorCidadeComponent {
   nomeCidade: string = '';
 
-  constructor(private servicoClima: ServicoClimaService) {}
+  constructor(private servicoClima: ServicoClimaService, ) {}
 
   enviarNomeCidade(): void {
     this.servicoClima.enviarCidade(this.nomeCidade).subscribe(
@@ -24,5 +25,7 @@ export class SeletorCidadeComponent {
         console.error('Erro:', error);
       }
     );
-  }
+  };
+
+  
 }
