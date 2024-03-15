@@ -12,8 +12,11 @@ import { InformacaoClimaComponent } from '../informacao-clima/informacao-clima.c
   styleUrls: ['./seletor-cidade.component.css']
 })
 export class SeletorCidadeComponent {
+
   nomeCidade: string = '';
+
   weather: string | null = null;
+
   private cityService: ServicoClimaService;
 
   constructor(private cityServiceInstance: ServicoClimaService) {
@@ -23,10 +26,8 @@ export class SeletorCidadeComponent {
   getWeather(): void {
     this.cityService.geocodificar(this.nomeCidade).subscribe(
       (response: any) => {
-        // Handle the response here
         console.log('Response:', response);
 
-        // Extract weather information
         if (response.weather && response.weather.length > 0) {
           this.weather = response.weather[0].description;
           console.log('Weather Description:', this.weather);
